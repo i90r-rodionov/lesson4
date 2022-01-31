@@ -1,0 +1,17 @@
+GET arch.homework/app
+Accept: application/json
+###
+GET arch.homework/monitor
+
+###
+GET arch.homework/monitor/health
+###
+GET arch.homework/monitor/health/liveness
+###
+GET arch.homework/monitor/health/readiness
+
+###
+GET arch.homework/monitor/info
+
+###
+

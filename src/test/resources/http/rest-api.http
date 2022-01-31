@@ -1,0 +1,22 @@
+### Окружение задается в src/test/resources/http/http-client.env.json
+
+GET localhost:1234/app
+Accept: application/json
+###
+GET {{host}}:{{port}}/app
+Accept: application/json
+###
+GET {{host}}:{{port}}/monitor
+
+###
+GET {{host}}:{{port}}/monitor/health
+###
+GET {{host}}:{{port}}/monitor/health/liveness
+###
+GET {{host}}:{{port}}/monitor/health/readiness
+
+###
+GET {{host}}:{{port}}/monitor/info
+
+###
+

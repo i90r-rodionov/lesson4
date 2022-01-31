@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: health-service-deployment
+spec:
+  replicas: 3
+  selector:                                 # pod selector
+    matchLabels:
+      app: app-pod               # pod label to select
+  minReadySeconds: 15
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:                                 # pod template
+    metadata:
+      labels:
+        app: app-pod             # pod label (for selector / for service)
+    spec:
+      containers:
+        - image: irnsk/otus:lesson4
+          imagePullPolicy: Always           # образ загружается всегда
+          name: health-service
+          ports:
+            - containerPort: 1234
+          readinessProbe:
+            httpGet:
+              scheme: HTTP
+              port: 1234
+              path: /monitor/health/readiness
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              scheme: HTTP
+              port: 1234
+              path: /monitor/health/liveness
+            initialDelaySeconds: 10
+            periodSeconds: 5
